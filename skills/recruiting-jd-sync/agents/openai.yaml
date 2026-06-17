@@ -1,0 +1,7 @@
+interface:
+  display_name: "Recruiting JD Sync"
+  short_description: "Sync recruiting JDs and trackers"
+  default_prompt: "Use $recruiting-jd-sync to ingest recruiting jobs, deduplicate them, classify them by JD technical stack and resume availability, and synchronize the JD dictionary, classification file, and application workbook."
+
+policy:
+  allow_implicit_invocation: true
