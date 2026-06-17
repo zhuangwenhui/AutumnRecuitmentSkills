@@ -1,25 +1,69 @@
 # AutumnRecuitmentSkills
 
-Reusable Codex skills for autumn recruiting workflows.
+> 给正在准备秋招、暑期实习和日常实习的后来者：这套 skill 不是为了把投递变得机械，而是为了让你在信息爆炸里少走一点弯路，把精力放回真正重要的事情上。
 
-## Skills
+## 写给学弟学妹的一封说明
 
-- `skills/recruiting-jd-sync`: collects recruiting jobs, deduplicates JD entries, classifies roles by technical stack and resume availability, and synchronizes JD Markdown, classification Markdown, and XLSX application trackers.
+如果你正在找实习，应该很快就会发现，最累的地方往往不是“写一份简历”本身，而是每天在不同平台、不同公司官网、不同内推链接之间来回切换：这个岗位是不是还在招？这个 JD 和昨天看到的是不是重复？这个岗位更适合哪一版简历？官网链接、Boss、实习僧、邮箱和微信入口到底哪个才是有效投递渠道？
 
-## Current Scope
+这些事情单独看都不难，但堆在一起就会消耗大量判断力。尤其到了集中投递阶段，如果没有一套稳定的整理方法，很容易出现三个问题：岗位信息越收集越乱，简历版本和岗位要求对不上，最后投递的时候只能凭印象匆忙决定。
 
-This repository currently contains one production-oriented skill:
+我创建这个仓库，是因为自己在暑期实习找工作的过程中真切感受到：系统性整理信息本身就是求职的一部分。把岗位 JD 完整记录下来，把岗位按照技术栈和简历版本归类，把投递链接和状态维护清楚，并不是形式主义，而是在帮助自己更有目的地投递。你越早建立这套秩序，后面越不容易被海量岗位拖着走。
 
-- dynamic D-style inventory IDs based on JD clusters and available resume variants
-- browser preflight guidance for logged-in recruiting sites
-- workbook validation, style normalization, and hyperlink repair scripts
-- deduplication and group-sheet rules for application trackers
+这个 skill 的目标，就是把这套流程沉淀成 Codex 可以复用的工作方式。它会提醒你：
 
-## Install Locally
+- 不要只看岗位列表，要进入详情页记录完整 JD；
+- 不要盲目新增岗位，要先做去重和有效性确认；
+- 不要把所有岗位混在一起，要按照技术要求和简历版本分类；
+- 不要让 Excel 只是一个链接堆，要让它成为真正投递时可信的操作表；
+- 不要让新增岗位继承错误格式、错误颜色或错误超链接；
+- 不要为了“收集很多”而忘了最终目的是更准确地投递。
 
-Copy a skill directory into `~/.codex/skills/`:
+如果你没有现成的多版本简历，也可以先根据收集到的 JD 初始化分类；如果你已经有不同方向的简历，就可以把岗位分类和简历版本对应起来。这个过程不是为了制造复杂度，而是为了让你每一次投递都知道自己为什么投这个岗位、用哪一版简历、从哪个渠道投。
+
+希望这套东西能帮你少一点重复劳动，多一点清醒判断。求职很容易让人陷入焦虑，但信息整理得越清楚，行动就越具体。能把岗位、JD、分类、简历和投递状态接起来，本身就是一种竞争力。
+
+## 当前包含的 Skill
+
+- `skills/recruiting-jd-sync`
+
+它用于协助完成招聘岗位信息的系统化整理，包括：
+
+- 从招聘网站、公司官网或收藏列表中收集岗位；
+- 基于详情页完整复现 JD 信息；
+- 按 URL、岗位 ID、公司、岗位名、城市和 JD 文本去重；
+- 根据岗位技术栈和可用简历版本分配 `D` 类入库编号；
+- 同步维护 JD 字典 Markdown、岗位分类 Markdown 和投递 Excel；
+- 校验 Excel 中的格式、超链接、分组 sheet、投递状态颜色和编号一致性。
+
+## 推荐使用方式
+
+把这个 skill 复制到本地 Codex skill 目录：
 
 ```bash
 mkdir -p ~/.codex/skills
 cp -R skills/recruiting-jd-sync ~/.codex/skills/
 ```
+
+之后在 Codex 中可以这样触发：
+
+```text
+Use $recruiting-jd-sync to collect new internship jobs, deduplicate them, classify them by JD technical stack and resume availability, and synchronize the JD dictionary, classification file, and application workbook.
+```
+
+如果你已经有自己的三文件结构，建议保持类似分工：
+
+- JD 汇总文件：作为岗位 JD 字典，完整保存官方或招聘页信息；
+- 分类文件：根据技术栈、匹配度和简历版本做分析；
+- Excel 表格：作为真正投递时使用的操作清单。
+
+## 维护原则
+
+这个仓库会优先维护可复用的流程和检查规则，而不是某一次求职记录本身。具体岗位、公司和简历版本可以随着个人情况变化，但下面这些原则应该保持稳定：
+
+- 信息源要可追溯；
+- JD 描述要完整；
+- 分类依据要来自岗位要求；
+- 投递链接要准确；
+- Excel 格式和状态标记要可信；
+- 最终目标是帮助投递决策，而不是堆积岗位数量。
